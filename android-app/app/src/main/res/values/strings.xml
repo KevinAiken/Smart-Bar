@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Smart Bar</string>
+    <string name="edit_message">Enter a message</string>
+    <string name="button_send">Start</string>
+    <string name="routine_select">My Routine</string>
+    <string name="num_reps">Number of Reps Completed:</string>
+    <string name="total_reps">0</string>
+</resources>
