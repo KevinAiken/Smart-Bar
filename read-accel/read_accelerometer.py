@@ -1,4 +1,3 @@
-import abc
 import ctypes
 from time import sleep
 from os import path
@@ -15,14 +14,8 @@ def _raw_data_to_accl(x, y, z):
     return x / 21.0, y / 21.0, z / 21.0
 
 
-class AccelerometerReader(abc.ABC):
-    @abc.abstractmethod
-    def get_acceleration(self):
-        """returns a 3-tuple with the acceleration (x, y, z)"""
-        pass
 
-
-class ArduinoAccelerometer(AccelerometerReader):
+class ArduinoAccelerometer(object):
     def __init__(self, dev="ttyACM1"):
         self._serial = serial.Serial(
             path.join("/dev/", dev),
