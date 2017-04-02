@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SmartBar 🏋</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <script src="/static/graph-processor.js"></script>
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <h1 class="col-xs-12 text-center">SmartBar 🏋</h1>
+    </div>
+    <div id="content">
+        {% for set in sets %}
+            <div class="well well-lg" style="
+    background: white;
+    box-shadow: inset 0px 0px 20px -5px rgba(0,0,0,0.75);
+    border-radius: 3px;
+">
+                <div class="row">
+                    <h2 class="col-xs-12 text-center">Set {{ set.id }}</h2>
+                </div>
+                <div class="row">
+                    <h3 class="col-xs-12">Weaker Arm</h3>
+                </div>
+                <div class="row">
+                    <p class="col-xs-12">
+                        {% if set.average_balance < 0 %}
+                            Left Arm
+                        {% elif set.average_balance > 0 %}
+                            Right Arm
+                        {% else %}
+                            Neither
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="row">
+                    <h3 class="col-xs-12">Time to Completion</h3>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12" data-plot="{{ set.plot_data|tojson|forceescape }}"></div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+</body>
+</html>
